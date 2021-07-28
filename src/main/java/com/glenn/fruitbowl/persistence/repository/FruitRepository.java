@@ -62,11 +62,11 @@ public interface FruitRepository extends JpaRepository<Fruit, Long>{
 	List<Fruit> findByTypeAndColour(String type, String colour);
 	
 	// Find by type and price
-	@Query(value = "SELECT * FROM Fruit WHERE fruit_type =?1 and price =2?", nativeQuery = true)
+	@Query(value = "SELECT * FROM Fruit WHERE fruit_type =?1 and price =?2", nativeQuery = true)
 	List<Fruit> findByTypeAndPrice(String type, double price);
 	
 	// Find by colour and price
-	@Query(value = "SELECT * FROM Fruit WHERE colour = 1? and price =2?", nativeQuery = true)
+	@Query(value = "SELECT * FROM Fruit WHERE colour = ?1 and price =?2", nativeQuery = true)
 	List<Fruit> findByColourAndPrice(String colour, double price);
 	
 	// Find all less than < price
