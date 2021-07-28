@@ -1,7 +1,6 @@
 package com.glenn.fruitbowl.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -10,6 +9,7 @@ import com.glenn.fruitbowl.persistence.repository.FruitRepository;
 @Service
 public class FruitService {
 
+	
 	public FruitRepository repo;
 	
 	public FruitService(FruitRepository repo) {
@@ -30,7 +30,7 @@ public class FruitService {
 	}
 	//Update
 	public Fruit update(Long id,Fruit fruit) {
-		// wee need to check it exists?
+		// we need to check it exists?
 		Fruit exists = this.repo.getById(id);
 		exists.setFruitType(fruit.getFruitType());
 		exists.setColour(fruit.getColour());
@@ -42,5 +42,56 @@ public class FruitService {
 	public Boolean delete(Long id) {
 		this.repo.deleteById(id); // this worked
 		return this.repo.existsById(id); // this should be false
+	}
+	//----------------------------------------------------------------------------------------------
+	//Custom @Query
+	//Find by fruit type
+	public List<Fruit> findByType(String type) {
+		return this.repo.findByType(type);
+	}
+	//Custom @Query
+	//Find by fruit colour
+	public List<Fruit> findByColour(String colour){
+		return this.repo.findByColour(colour);
+	}
+	//Custom @Query
+	//Find by fruit price
+	public List<Fruit> findByPrice(double price){
+		return this.repo.findByPrice(price);
+	}
+	//Custom @Query
+	//Find by type and colour
+	public List<Fruit> findByTypeAndColour(String type, String colour){
+		return this.repo.findByTypeAndColour(type, colour);
+	}
+	//Custom @Query
+	//Find by type and price
+	public List<Fruit> findByTypeAndPrice(String type, double price){
+		return this.repo.findByTypeAndPrice(type, price);
+	}
+	//Custom @Query
+	//Find by colour and price
+	public List<Fruit> findByColourAndPrice(String colour, double price){
+		return this.repo.findByColourAndPrice(colour, price);
+	}
+	//Custom @Query
+	//Find all less than < price
+	public List<Fruit> findLessThanPrice(double price){
+		return this.repo.findLessThanPrice(price);		
+	}
+	//Custom @Query
+	//Find all less than > price
+	public List<Fruit> findGreaterThanPrice(double price){
+		return this.repo.findGreaterThanPrice(price);
+	}
+	//Custom @Query
+	//Find between prices x and y
+	public List<Fruit> findGreaterThanButLessThanPrice(double price1, double price2){
+		return this.repo.findGreaterThanButLessThanPrice(price1, price2);
+	}
+	//Custom @Query
+	//Find by type and between prices
+	public List<Fruit> findByTypeAndGreaterThanButLessThanPrice(String type, double price1, double price2){
+		return this.repo.findByTypeAndGreaterThanButLessThanPrice(type, price1, price2);
 	}
 }
